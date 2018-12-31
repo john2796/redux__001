@@ -1,15 +1,18 @@
-import { createStore } from "redux";
-
 const initialState = {
   repos: [],
   searchInputValue: "default"
 };
 
-const reducer = (state = initialState, action) => {
-  console.log("reducer", action);
+export default (state = initialState, { type, payload }) => {
+  console.log(type, payload);
+  //  switch (type) {
+
+  //  case typeName:
+  //    return { ...state, ...payload }
+
+  //  default:
+  //    return state
+  //  }
 
   return state;
 };
-
-const store = createStore(reducer);
-export default store;

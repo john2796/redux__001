@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 export class RepoSearch extends Component {
-  static propTypes = {
-    prop: PropTypes
-  };
-
   render() {
     return (
       <div>
         <h1>Repo search</h1>
+        <input type="text" />
+        <ul>
+          <li>repo #1</li>
+          <li>repo #2</li>
+        </ul>
       </div>
     );
   }
