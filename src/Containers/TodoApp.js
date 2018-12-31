@@ -5,47 +5,23 @@ import { connect } from "react-redux";
 import { actions } from "../store/index";
 
 export class TodoApp extends Component {
-  // formSubmitted = event => {
-  //   event.preventDefault();
+  formSubmitted = event => {
+    event.preventDefault();
 
-  //   this.setState({
-  //     newTodo: "",
-  //     todos: [
-  //       ...this.state.todos,
-  //       {
-  //         title: this.state.newTodo,
-  //         done: false
-  //       }
-  //     ]
-  //   });
-  // };
+    this.props.onAddTodo({
+      title: this.props.newTodo,
+      done: false
+    });
 
-  // toggleTodoDone = (event, index) => {
-  //   const todos = [...this.state.todos]; //copy arr
-  //   todos[index] = {
-  //     ...todos[index],
-  //     done: event.target.checked
-  //   };
-  //   this.setState({ todos });
-  // };
+    this.props.onNewTodoChanged("");
+  };
 
-  // removeTodo = index => {
-  //   const todos = [...this.state.todos];
-  //   todos.splice(index, 1);
-
-  //   this.setState({ todos });
-  // };
-
-  // allDone = () => {
-  //   const todos = this.state.todos.map(todo => {
-  //     return {
-  //       title: todo.title,
-  //       done: true
-  //     };
-  //   });
-
-  //   this.setState({ todos });
-  // };
+  toggleTodoDone = (event, index) => {
+    this.props.onTodoDone({
+      index,
+      checked: event.target.checked
+    });
+  };
 
   render() {
     const { message, newTodo, todos } = this.props;
@@ -54,15 +30,15 @@ export class TodoApp extends Component {
         <h3>{message}</h3>
         <NewTodoForm
           newTodo={newTodo}
-          formSubmitted={this.props.formSubmitted}
+          formSubmitted={this.formSubmitted}
           newTodoChange={this.props.onNewTodoChanged}
         />
         <TodoList
           todos={todos}
-          toggleTodoDone={this.props.toggleTodoDone}
-          removeTodo={this.props.removeTodo}
+          toggleTodoDone={this.toggleTodoDone}
+          removeTodo={this.props.onRemoveTodo}
         />
-        <button onClick={() => this.props.allDone()}>All Done</button>
+        <button onClick={this.props.onToggleAllDone}>All Done</button>
       </div>
     );
   }
@@ -75,7 +51,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onNewTodoChanged: newTodo => dispatch(actions.newTodoChanged(newTodo))
+  onNewTodoChanged: newTodo => dispatch(actions.newTodoChanged(newTodo)),
+  onAddTodo: todo => dispatch(actions.addTodo(todo)),
+  onTodoDone: toggle => dispatch(actions.todoDone(toggle)),
+  onRemoveTodo: idx => dispatch(actions.removeTodo(idx)),
+  onToggleAllDone: index => dispatch(actions.toggleAllDone(index))
 });
 
 export default connect(
