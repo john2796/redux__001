@@ -1,10 +1,21 @@
 import React from "react";
+import TodoItem from "./TodoItem";
 
-const TodoList = () => {
+const TodoList = props => {
   return (
-    <div>
-      <h1>todoList</h1>
-    </div>
+    <ul>
+      {props.todos.map((todo, index) => {
+        return (
+          <TodoItem
+            key={index}
+            index={index}
+            todo={todo}
+            toggleTodoDone={props.toggleTodoDone}
+            removeTodo={props.removeTodo}
+          />
+        );
+      })}
+    </ul>
   );
 };
 

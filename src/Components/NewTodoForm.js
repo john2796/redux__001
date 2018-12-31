@@ -1,9 +1,19 @@
 import React from "react";
 
-const NewTodoForm = () => {
+const NewTodoForm = props => {
   return (
     <div>
-      <h1>neTood</h1>
+      <form onSubmit={props.formSubmitted}>
+        <label htmlFor="newTodo">NewTodoForm</label>
+        <input
+          type="text"
+          onChange={props.newTodoChange}
+          id="newTodo"
+          name="newTodo"
+          value={props.newTodo}
+        />
+        <button type="submit">Add Todo</button>
+      </form>
     </div>
   );
 };
