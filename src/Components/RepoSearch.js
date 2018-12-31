@@ -18,6 +18,8 @@ class RepoSearch extends Component {
         </form>
         <ul>
           <li>tesibng</li>
+          <li>tesibng</li>
+          <li>tesibng</li>
           {this.props.repos.map(repo => {
             return (
               <li key={repo.id}>
