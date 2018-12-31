@@ -1,23 +1,106 @@
+const NEW_TODO_CHANGED = "NEW_TODO_CHANGED";
+const ADD_TODO = "ADD_TODO";
+const TOGGLE_TODO_DONE = "TOGGLE_TODO_DONE";
+const REMOVE_TODO = "REMOVE_TODO";
+const TOGGLE_ALL_DONE = "TOGGLE_ALL_DONE";
+
 const initialState = {
-  repos: [],
-  searchInputValue: "default"
+  message: "Hello Coding Garden!",
+  newTodo: "",
+  todos: [
+    {
+      title: "Lean React",
+      done: false
+    },
+    {
+      title: "Learn JSX",
+      done: false
+    }
+  ]
 };
-// Reduceres
-export default (state = initialState, action) => {
+
+// ACTIONS
+export const actions = {
+  newTodoChanged(newTodo) {
+    console.log(newTodo);
+    return {
+      type: NEW_TODO_CHANGED,
+      newTodo: newTodo
+    };
+  },
+  addTodo(todo) {
+    return {
+      type: ADD_TODO,
+      todo
+    };
+  },
+  todoDone(toggle) {
+    return {
+      type: TOGGLE_TODO_DONE,
+      toggle
+    };
+  },
+  removeTodo(idx) {
+    return {
+      type: REMOVE_TODO,
+      idx
+    };
+  },
+  toggleAllDone(index) {
+    return {
+      type: TOGGLE_ALL_DONE,
+      index
+    };
+  }
+};
+
+// reducer
+export const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "SEARCH_INPUT_CHANGE":
-      console.log(state.searchInputValue);
+    case NEW_TODO_CHANGED: {
       return {
         ...state,
-        searchInputValue: action.value
+        newTodo: action.newTodo
       };
-    case "SET_REPOS":
-      console.log(state.searchInputValue);
+    }
+    case ADD_TODO: {
       return {
         ...state,
-        ...action,
-        repos: action.repos
+        todos: [...state.todos, action.todo]
       };
+    }
+    case TOGGLE_TODO_DONE: {
+      const todos = [...state.todos]; //copy arr
+      todos[action.toggle.index] = {
+        ...todos[action.toggle.index],
+        done: action.toggle.checked
+      };
+      return {
+        ...state,
+        todos
+      };
+    }
+    case REMOVE_TODO: {
+      const todos = [...state.todos];
+      todos.splice(action.idx, 1);
+      return {
+        ...state,
+        todos
+      };
+    }
+    case TOGGLE_ALL_DONE: {
+      const todos = state.todos.map(todo => {
+        return {
+          title: todo.title,
+          done: true
+        };
+      });
+      return {
+        ...state,
+        todos
+      };
+    }
+
     default:
       return state;
   }
