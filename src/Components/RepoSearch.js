@@ -1,11 +1,28 @@
-import React from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-const RepoSearch = () => {
-  return (
-    <div>
-      <h1>Repos Search </h1>
-    </div>
-  );
-};
+export class RepoSearch extends Component {
+  static propTypes = {
+    prop: PropTypes
+  };
 
-export default RepoSearch;
+  render() {
+    return (
+      <div>
+        <h1>Repo search</h1>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  inputValue: state.searchInputValue
+});
+
+const mapDispatchToProps = {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RepoSearch);

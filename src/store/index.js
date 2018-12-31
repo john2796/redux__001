@@ -1,3 +1,10 @@
+import { createStore } from "redux";
+
+const initialState = {
+  repos: [],
+  searchInputValue: "default"
+};
+
 const reducer = (state = initialState, action) => {
   console.log("reducer", action);
 
