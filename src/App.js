@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import "./App.css";
-import RepoSearch from "./Components/RepoSearch";
+import TodoApp from "./Components/TodoApp";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <RepoSearch />
+        <TodoApp />
       </div>
     );
   }
