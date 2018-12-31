@@ -7,7 +7,7 @@ const NewTodoForm = props => {
         <label htmlFor="newTodo">NewTodoForm</label>
         <input
           type="text"
-          onChange={props.newTodoChange}
+          onChange={evt => props.newTodoChange(evt.target.value)}
           id="newTodo"
           name="newTodo"
           value={props.newTodo}

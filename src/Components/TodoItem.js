@@ -1,10 +1,23 @@
 import React from "react";
 
-const TodoItem = () => {
+const TodoItem = ({ todo, index, removeTodo, toggleTodoDone }) => {
   return (
-    <div>
-      <h1>test</h1>
-    </div>
+    <li>
+      <input
+        type="text"
+        onChange={event => toggleTodoDone(event, index)}
+        type="checkbox"
+        checked={todo.done}
+      />
+      <span
+        style={{
+          textDecoration: todo.done ? "line-through" : "inherit"
+        }}
+      >
+        {todo.title}
+      </span>
+      <button onClick={() => removeTodo(index)}>Remove</button>
+    </li>
   );
 };
 

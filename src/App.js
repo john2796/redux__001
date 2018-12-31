@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import TodoApp from "./Components/TodoApp";
+import TodoApp from "./Containers/TodoApp";
 
 class App extends Component {
   render() {
