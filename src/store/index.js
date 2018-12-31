@@ -3,16 +3,15 @@ const initialState = {
   searchInputValue: "default"
 };
 
-export default (state = initialState, { type, payload }) => {
-  console.log(type, payload);
-  //  switch (type) {
-
-  //  case typeName:
-  //    return { ...state, ...payload }
-
-  //  default:
-  //    return state
-  //  }
-
-  return state;
+export default (state = initialState, action) => {
+  switch (action.type) {
+    case "SEARCH_INPUT_CHANGE":
+      console.log(state.searchInputValue);
+      return {
+        ...state,
+        searchInputValue: action.value
+      };
+    default:
+      return state;
+  }
 };
